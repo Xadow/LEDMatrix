@@ -9,12 +9,10 @@
 gotoSleep KEYWORD2
 wakeUp KEYWORD2
 sendString KEYWORD2
-sendPoint KEYWORD2
-sendPoint2 KEYWORD2
+setPoints KEYWORD2
 sendChar KEYWORD2
 setDir KEYWORD2
 setPoint KEYWORD2
-disPoint KEYWORD2
 
 #######################################
 # Instances (KEYWORD2)

@@ -23,11 +23,10 @@ public:
 	void gotoSleep();
 	void wakeUp();
 	void sendString(unsigned char cycle, int ts, char *str);
-	void sendPoint(unsigned char dta[], int);
+	void setPoints(unsigned char dta[], int);
 	void sendChar(char c);
 	void setDir(unsigned char dir);
 	void setPoint(int x, int y, int state);
-	void disPoint();
 };
 
 #endif

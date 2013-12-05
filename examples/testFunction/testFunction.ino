@@ -19,23 +19,20 @@
 
 #define ADDRESS 0x04
 
-unsigned char dta[50] = {
-    0x03, 
-    0b10000,
-    0b01000,
-    0b10000,
-    0b00000,
-    0b00000,
-    0b00000,
-    0b00000,
+unsigned char data[5] = {
+  0b1010101,
+  0b0101010,
+  0b1010101,
+  0b0101010,
+  0b1010101,
 };
 
-unsigned char dta2[5] = {
-    0b1000000,
-    0b0100000,
-    0b1000000,
-    0b0000000,
-    0b0000001,
+unsigned char data2[5] = {
+  0b0101010,
+  0b1010101,
+  0b0101010,
+  0b1010101,
+  0b0101010,
 };
 
 LEDMatrix fiveBySeven = LEDMatrix(ADDRESS);
@@ -65,17 +62,19 @@ void loop()
 void dispCmd()
 {
     Serial.println("***********************************");
-    Serial.println("1: display matrix");
-    Serial.println("2: string once");
-    Serial.println("3: string loop");
-    Serial.println("4: display char");
-    Serial.println("5: set direction: DIR_DOWN");
-    Serial.println("6: set direction: DIR_NORMAL");
-    Serial.println("7: set direction: DIR_RIGHT");
-    Serial.println("8: set direction: DIR_LEFT");
-    Serial.println("9: display matrix: DIRRIGHT");
-    Serial.println("A: set point test");
-    Serial.println("S: goto sleed");
+    Serial.println("1: set direction: DIR_DOWN");
+    Serial.println("2: set direction: DIR_NORMAL");
+    Serial.println("3: string once");
+    Serial.println("4: string loop");
+    Serial.println("5: display char");
+    Serial.println("A: animate");
+    Serial.println("***********************************");
+    Serial.println("6: set direction: DIR_RIGHT");
+    Serial.println("7: set direction: DIR_LEFT");
+    Serial.println("8: display matrix");
+    Serial.println("9: display different matrix");
+    Serial.println("***********************************");
+    Serial.println("S: goto sleep");
     Serial.println("W: wake up");
     Serial.println("***********************************");
 }
@@ -83,55 +82,63 @@ void dispCmd()
 void dtaProc(unsigned char cmd)
 {
     switch(cmd)
-    {
+    {      
         case '1':
-        Serial.println("dispoint");
-        fiveBySeven.sendPoint(dta, 5);
-        break;
-
-        case '2':
-        Serial.println("string once");
-        fiveBySeven.sendString(STR_ONCE, 400, "hello world");   // once
-        break;
-        
-        case '3':
-        Serial.println("string loop");
-        fiveBySeven.sendString(STR_LOOP, 400, "hello world");   // once
-        break;
-        
-        case '4':
-        Serial.println("disp char");
-        fiveBySeven.sendChar('A');
-        break;
-        
-        case '5':
         Serial.println("set direction: DIR DOWN");
         fiveBySeven.setDir(DIR_DOWN);
         break;
         
-        case '6':
+        case '2':
         Serial.println("set direction: DIR NORMAL");
         fiveBySeven.setDir(DIR_NORMAL);
         break;
         
-        case '7':
+        case '3':
+        Serial.println("string once");
+        fiveBySeven.sendString(STR_ONCE, 400, "once");
+        break;
+        
+        case '4':
+        Serial.println("string loop");
+        fiveBySeven.sendString(STR_LOOP, 400, "loop");
+        break;
+        
+        case '5':
+        Serial.println("disp char");
+        fiveBySeven.sendChar('A');
+        break;
+        
+        case 'A':
+        Serial.println("animate");
+        fiveBySeven.setPoint(0, 0, 1);
+        delay(1000); //give some time to animate
+        fiveBySeven.setPoint(1, 1, 1);
+        delay(1000);
+        fiveBySeven.setPoint(2, 2, 1);
+        delay(1000);
+        fiveBySeven.setPoint(3, 3, 1);
+        delay(1000);
+        fiveBySeven.setPoint(4, 4, 1);
+        break;
+        
+        case '6':
         Serial.println("set direction: DIR RIGHT");
         fiveBySeven.setDir(DIR_RIGHT);
         break;
         
-        case '8':
+        case '7':
         Serial.println("set direction: DIR LEFT");
         fiveBySeven.setDir(DIR_LEFT);
         break;
         
-        case '9':
-        Serial.println("matrix - dir right");
-        fiveBySeven.sendPoint(dta2, 8);
+        case '8':
+        Serial.println("display matrix");
+        fiveBySeven.setPoints(data, 5);
         break;
         
-        case 'A':
-        Serial.println("set point");
-        fiveBySeven.disPoint();
+        case '9':
+        Serial.println("display different matrix");
+        fiveBySeven.setPoints(data2, 5);
         break;
         
         case 'S':
