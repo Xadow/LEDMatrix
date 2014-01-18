@@ -7,8 +7,15 @@
  * This sketch presents a menu when you open the Serial Console
  * for you to select and view the various modes of the 5x7 Matrix
  *
+ * Theres a 'datasheet' decribing functions and more at: 
+ * https://docs.google.com/document/d/1a5goyVOdg7LhKmaBIOASU9KGieQbUIGRv5aqFcrxuwE/edit
+ * 
  * Check out the wiki page for more info
  * http://www.seeedstudio.com/wiki/Xadow_LED_5X7
+ * (note theres 2 version of the firmware out there, so either the
+ * current wiki code will work or this library will work
+ * if this library doesnt work and youd like it to, see the datasheet
+ * for info on how to upgrade firmware
  * 
  * Seeed Studios is an Open Hardware company. Support our contributions by buying
  * our products! http://www.seeedstudio.com/
